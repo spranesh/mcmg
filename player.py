@@ -30,6 +30,14 @@ def GetOptions():
                      ,dest="qpm"
                      ,help="Quarters per minute - an indicator of the beat (180 by default)")
 
+    parser.add_option("-t"
+                     ,"--octave"
+                     ,action="store"
+                     ,type="int"
+                     ,default=4
+                     ,dest="octave"
+                     ,help="The octave to generate music at (default 4)")
+
     parser.add_option("-o"
                      ,"--output_file"
                      ,action="store"
@@ -54,7 +62,7 @@ def GetOptions():
     else:
       f = open(options.filename, "r")
 
-    return (f, options.qpm, options.output_filename, options.pysynth_module)
+    return (f, options.qpm, options.output_filename, options.octave, options.pysynth_module)
 
 
 def ImportPysynthModule(c):
@@ -76,7 +84,7 @@ def ImportPysynthModule(c):
 
 def main():
 
-  (read_file_handle, qpm, output_filename, pysynth_module) = GetOptions()
+  (read_file_handle, qpm, output_filename, octave, pysynth_module) = GetOptions()
 
   make_wav = ImportPysynthModule(pysynth_module)
 
@@ -84,7 +92,7 @@ def main():
   english_notes = []
 
   for (note, length) in carnatic_notes:
-    english_note = mohanam.Translate(note)
+    english_note = mohanam.Translate(note, octave)
     english_notes.append((english_note, length))
 
   make_wav(english_notes, fn=output_filename, bpm = qpm)

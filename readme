@@ -1,0 +1,16 @@
+Run by
+
+$ python player.py
+
+This should bring up some help.
+
+Here is a minimal working run:
+
+$ python player.py -f varnam.txt
+
+Try
+
+$ python player.py -h 
+
+for some useful command line options
+
