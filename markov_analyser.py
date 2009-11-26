@@ -8,7 +8,8 @@ import random
 class MarkovAnalyser:
   def __init__(self, width=4):
     self.width = width
-    self.ascend_descend_probability = 0.3
+    self.ascend_descend_probability = 0.1
+    self.flow_probability = 0.3
     self.songs = []
     self.markov_state_space = {}
 
@@ -81,9 +82,9 @@ class MarkovAnalyser:
       for i in range(len(song) - self.width-1):
         key = self.MakeKeyFromNotes(song[i:i+self.width])
         try:
-          self.markov_state_space[key].append(song[i+1])
+          self.markov_state_space[key].append((song[i+self.width], song[i+self.width:i+2*self.width]))
         except KeyError:
-          self.markov_state_space[key] = [song[i+1]]
+          self.markov_state_space[key] = [(song[i+1], song[i+1:i+self.width])]
 
     return
 
@@ -122,6 +123,7 @@ class MarkovAnalyser:
 
 
   def MarkovGenerate(self, song_length=100):
+    # print self.markov_state_space
     notes = self.GenerateStartingNotes()
 
     i = 0
@@ -131,7 +133,20 @@ class MarkovAnalyser:
       perturbed_note = self.PerturbNote(notes[-self.width:])
 
       if self.markov_state_space.has_key(key):
-        next_note = random.choice(self.markov_state_space[key])
+        next_note, follow_notes = random.choice(self.markov_state_space[key])
+
+        r = random.uniform(0,1)
+        if r < self.flow_probability :
+          # print follow_notes[-1], notes[-1]
+          if follow_notes[-1] != notes[-1]:
+            # print "In the flow"
+            notes.extend(follow_notes)
+            # print i,
+            # print follow_notes
+            i += sum([l for (s,l) in map(self.UnHashNote, follow_notes)])
+            # print i
+            continue
+
         next_note = self.ChooseFirstWithProbability(perturbed_note, next_note, self.ascend_descend_probability)
       else:
         next_note = perturbed_note

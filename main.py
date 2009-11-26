@@ -19,17 +19,17 @@ def GetOptions():
                      ,"--qpm"
                      ,action="store"
                      ,type="int"
-                     ,default=180
+                     ,default=80
                      ,dest="qpm"
-                     ,help="Quarters per minute - an indicator of the beat (180 by default)")
+                     ,help="Quarters per minute - an indicator of the beat (80 by default)")
     
     parser.add_option("-n"
                      ,"--notes"
                      ,action="store"
                      ,type="int"
-                     ,default=320
+                     ,default=40
                      ,dest="num_notes"
-                     ,help="number of notes to be generated (default 320)")
+                     ,help="number of notes to be generated (default 40)")
 
     parser.add_option("-w"
                      ,"--width"
