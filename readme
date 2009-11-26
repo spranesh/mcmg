@@ -1,16 +1,12 @@
-Run by
 
-$ python player.py
+This program is a markov chain based music generator in the Mohanam Raga.
 
-This should bring up some help.
+The simplest way of running the program is by
 
-Here is a minimal working run:
+    $ python main.py pieces/*
 
-$ python player.py -f varnam.txt
+The program takes various commandline options. Try
 
-Try
+    $ python main.py -h
 
-$ python player.py -h 
-
-for some useful command line options
 
