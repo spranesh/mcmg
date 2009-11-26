@@ -1,0 +1,17 @@
+g  g  p  ,  p  , | d  p  S  ,  S  , ||
+R  S  d  d  p  , | d  p  g  g  r  , ||
+
+g  p  d  S  d  , | d  p  g  g  r  , ||
+g  g  d  p  g  , | p  ,  g  g  r  s ||
+
+g  g  g  g  r  g | p  g  p  ,  p  , ||
+g  g  d  p  d  , | d  p  S  ,  S  , ||
+
+d  G  R  R  S  S | d  S  d  d  d  p ||
+g  p  d  S  d  p | d  p  g  g  r  s ||
+
+s  g  g  ,  g  , | g  r  p  g  r  , ||
+s  r  s  g  r  s ||
+
+g  g  p  ,  p  , | d  p  S  ,  S  , ||
+R  S  d  d  p  , | d  p  g  g  r  , ||
