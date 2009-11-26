@@ -9,6 +9,15 @@ def ConvertString(s):
       g , g, r , , , 
       [(g, 8), (g, 8), (r, 16)]
       (assuming tempo = 4) """
+
+  return ConvertLengthToTempo(CollectNotes(s))
+
+def CollectNotes(s):
+  """ Collects notes and ,s to form (notes, length)
+      Converts 
+        g , g, r , , ,  
+      to [(g, 2) (g, 2) (r, 4)]"""
+
   standard_length = 1
 
   li = s.split()
@@ -26,7 +35,9 @@ def ConvertString(s):
         print "Does the piece start with a , ? Error."
         return
       notes[-1] = (previous_note, previous_length+standard_length)
+  return notes
 
+def ConvertLengthToTempo(notes):
   # find the least common multiple of all the lengths
   note_lengths = [b for (a, b) in notes]
   lcm = util.lcm_many(*note_lengths)

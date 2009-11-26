@@ -7,6 +7,7 @@
 # We write S  R  G  P  D  S  in the higher octave
 # We write s. r. g. p. d. s. in the lower octave
 
+notes = [s for s in "srgpd"]
 mapping = { 's' : 'c'
           , 'r' : 'd'
           , 'g' : 'e'

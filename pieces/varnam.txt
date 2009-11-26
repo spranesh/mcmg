@@ -14,4 +14,25 @@ g  ,  r  g  r  s  r  ,    |  s  r  s  g  r  g  s  r  ||
 s  d. s  r  g  r  g  p    |  g  p  d  ,  p  ,  ,  ,  ||
 
 g  p  d  p  d  S  R  G    |  R  ,  G  S  ,  R  d  ,  ||
-S  P  ,  d  S  R  G  S    | ,  d  p  ,  g  r  s  r   ||
+S  p  ,  d  S  R  G  S    |  ,  d  p  ,  g  r  s  r  ||
+
+g  ,  g  ,  g  ,  ,  r    |  r  g  p  g  p  ,  ,  ,  ||
+g  g  d  d  p  ,  g  g    |  d  p  g  p  g  r  s  r  ||
+
+g  ,  ,  r  ,  s  ,  ,    |  r  ,  ,  ,  d. ,  ,  ,  ||
+r  ,  d. ,  s  ,  ,  ,    |  r  ,  ,  ,  g  ,  r  ,  ||
+
+g  ,  g  r  g  r  s  r    |  g  ,  g  p. d. d. s  r  ||
+g  ,  g  g  d  p  g  r    |  g  ,  g  S  d  p  g  r  ||
+
+p  ,  d  d  p  ,  g  r    |  s  ,  r  g  r  ,  s  d. ||
+s  ,  r  g  p  ,  d  ,    |  S  S  ,  d  p  ,  g  r  ||
+
+S  ,  R  G  R  S  R  S    |  d  S  d  p  g  r  s  r  ||
+s  ,  ,  ,  s  ,  s  s    |  r  r  g  g  p  p  d  d  ||
+
+S  R  G  R  G  R  d  S    |  R  S  R  S  p  d  S  d  ||
+S  d  g  p  d  p  d  p    |  R  S  d  p  g  r  s  r  ||
+
+g  ,  g  ,  g  ,  ,  r    |  r  g  p  g  p  ,  ,  ,  ||
+g  g  d  d  p  ,  g  g    |  d  p  g  p  g  r  s  r  ||
