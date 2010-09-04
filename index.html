@@ -1,0 +1,229 @@
+<html> <head>
+
+<title>A Markov Chain based Music Generator</title> 
+<style type="text/css">
+<!--
+
+li a{
+color: #989898; 
+}
+li a:visited {
+color: #989898;
+}
+
+li a:hover {
+color: #000000;
+}
+
+body{
+background: #FFFFFF;
+color: black;
+       font-family: sans-serif;
+       margin-left:0.6em;
+width:800px;
+}
+
+ul li{
+	list-style:disc;
+color: black;
+       font-size:0.9em;
+}
+
+ul ul li{
+	list-style:disc;
+color:black;
+}
+
+.heading{
+	color: #1a6ed5;
+       font-size:1.05em;
+}
+
+.author{
+color: #172380;
+margin:1em;
+       margin-left:0em;
+}
+
+.enumerate{
+color: #0F386B;
+display:inline;
+}
+.version{
+color: black;
+display:inline;
+margin:0.5em;
+       margin-left:0em;
+}
+
+.date{
+color: #228a73;
+       font-size:0.9em;
+}
+
+p, ol{
+	font-size:0.9em;
+}
+
+h2, h4{
+color: #3b61c3;
+}
+
+pre{
+            background: #edf3ff;
+	    margin-top:0.7em;
+	    margin-bottom:0.7em;
+	    padding-top: 1em;
+	    padding-bottom: 1em;
+}
+
+em{
+color: #1a8a4f;
+       font-style:normal;
+       font-weight:bolder;
+}
+
+.footer{
+	margin-top:1em;
+	padding-top:0.5em;
+	border-top: 1px solid #131b6f;
+	font-size:0.85em;
+}
+</style>
+
+</head>
+
+
+<body> 
+<h2> A Markov Chain Based Music Generator</h2>
+
+<h4>Mohana Ragam</h4>
+
+<div class ="author">Pranesh Srinivasan</div>
+<div class = "date">License : Open BSD</div> <br />
+
+<div class = "heading">Description</div>
+<p>
+A simple music generator that generates small pieces in the Mohanam Ragam,
+using Markov chains and random walks.
+
+</p><p>
+The Mohanam Ragam is one of the "smaller" (in terms of the number of notes)
+ragams in carnatic music. It is supposed to sound good even without gamakams
+(slides). It also has the same notes during its ascent and descent, thus making
+it easier to analyse.
+</p>
+
+<pre>
+	Ascent  : sa ri ga pa dha Sa
+	
+	Descent : Sa dha pa ga ri sa
+</pre>
+
+<p>
+This python tool uses some small pieces in the mohanam ragam, to quickly build
+a transition graph, before performing a random walk on it, keeping in mind
+several factors like the size of transitions, small patterns and some rhythm.
+</p><p>
+
+It was written in two days, and obviously does not generate very good music :).
+It <a href="/~spranesh/projects/mcmg/nice">has</a> produced some good pieces however.
+</p><p>
+
+This idea struck me when I was doing Markov Chains during the "Performance
+Evaluation of Computer Systems" course I took this semester.
+</p>
+
+<div class="heading">Examples</div>
+<p>
+During half a day of random playing around, I stumbled on pieces I liked. You
+can find them <a href="/~spranesh/projects/mcmg/nice">here</a>. In particular I like <a
+href="/~spranesh/projects/mcmg/nice/out7.wav">out7.wav</a>, <a href="/~spranesh/projects/mcmg/nice/out8.wav">out8.wav</a> and <a
+href="/~spranesh/projects/mcmg/nice/out2.wav">out2.wav</a>.
+
+</p><p>
+The input is in (nearly) standard Carnatic notation, thereby allowing easier
+import of music in the future. You can find the pieces it currently uses as
+reference <a href="/~spranesh/projects/mcmg/pieces">here</a>.
+</p>
+
+<div class = "heading">The Small Stuff</div>
+<p>
+This tool (<tt>mmarkov</tt> if you must), is written in python, and uses the <a
+href="http://home.arcor.de/mdoege/pysynth/">pysynth</a> library to generate the
+audio file.
+</p><p>
+
+The "music theory" that is often an issue with such software has been handled
+in a couple of python files by me. Carnatic music structure and notation, allow
+for very easy manipulation. It is only in the final step that the music is
+converted into western notation for pysynth to handle.
+</p><p>
+
+pysynth can output the resultant wav file modelling 
+</p>
+<ul>
+<li> a simple piano </li>
+<li> a piano with some caching (the last note rings on for some time) </li>
+<li> a stringed instrument (it tries to manage some of the other harmonics that crop up) </li>
+</ul>
+<p>
+This program also supports all three kinds.
+</p>
+
+
+<div class="heading">Download</div>
+<p> <em>Download</em> it <a href="/~spranesh/projects/mcmg/mmarkov.tar">here</a>. It requires python
+2.x, and the modelling of the cached piano or a stringed instrument will
+require numpy/scipy </p>
+
+<div class="heading">Usage</div>
+<p>
+Running the program is simple. Download and extract the tar file above.
+<tt>cd</tt> into the program root, and run
+
+<pre>
+	$ python main.py pieces/*
+</pre>
+
+for its simplest invocation.
+</p><p>
+
+The program takes many command line parameters, that control
+
+<ul>
+<li> the instrument used in the output <tt>(-p)</tt>
+<li> the output wave <tt>(-o)</tt> file and output score <tt>(-s)</tt> file names 
+<li> the speed of the music generated <tt>(-q)</tt> in quarters per minute
+<li> the number of notes (roughly) generated <tt>(-n)</tt>
+<li> the width of its memory during the random walk <tt>(-w)</tt>
+<li> the pitch of the base octave <tt>(-t)</tt>
+</ul>
+
+The last parameter, the memory width <tt>(-w)</tt> controls the amount of
+similarity with the original pieces in some sense.
+</p><p>
+
+A more complicated run would be
+<pre>
+	$ python main.py -p s -w 5 -t 2 -n 60 -q 200 -o sample.wav -s sample_notes.txt pieces/*
+</pre>
+
+This would make the program use 
+
+<ul>
+<li> a string (<tt>s</tt> for the <tt>-p</tt> option) instrument in the output
+<li> have a memory width of 5
+<li> use the 2nd octave as the base octave (instead of the default 4)
+<li> generate roughly 60 notes
+<li> with a speed proportional to 200 (equal to 200 quarters per minute)
+<li> set the wave output to sample.wav (for the wave file) 
+<li> set the score output to sample_notes.txt (for the score)
+<li> read music from <tt>pieces/*</tt>
+</ul>
+</p>
+
+
+<div class="footer">Pranesh Srinivasan (Open BSD License)</span></div>
+
+</body></html>
