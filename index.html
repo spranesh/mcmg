@@ -1,92 +1,241 @@
-<!doctype html>
-<!-- The Time Machine GitHub pages theme was designed and developed by Jon Rohan, on Feb 7, 2012. -->
-<!-- Follow him for fun. http://twitter.com/jonrohan. Tail his code on http://github.com/jonrohan -->
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<html> <head>
 
-  <link rel="stylesheet" href="stylesheets/stylesheet.css" media="screen"/>
-  <link rel="stylesheet" href="stylesheets/pygment_trac.css"/>
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-  <script type="text/javascript" src="javascripts/script.js"></script>
+<title>A Markov Chain based Music Generator</title> 
+<style type="text/css">
+<!--
 
-  <title>Mcmg</title>
-  <meta name="description" content="A Markov Chain based music generator for the world of carnatic music.">
+li a{
+color: #989898; 
+}
+li a:visited {
+color: #989898;
+}
 
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+li a:hover {
+color: #000000;
+}
+
+body{
+background: #FFFFFF;
+color: black;
+       font-family: sans-serif;
+       margin-left:0.6em;
+width:800px;
+}
+
+ul li{
+	list-style:disc;
+color: black;
+       font-size:0.9em;
+}
+
+ul ul li{
+	list-style:disc;
+color:black;
+}
+
+.heading{
+	color: #1a6ed5;
+       font-size:1.05em;
+}
+
+.author{
+color: #172380;
+margin:1em;
+       margin-left:0em;
+}
+
+.enumerate{
+color: #0F386B;
+display:inline;
+}
+.version{
+color: black;
+display:inline;
+margin:0.5em;
+       margin-left:0em;
+}
+
+.date{
+color: #228a73;
+       font-size:0.9em;
+}
+
+p, ol{
+	font-size:0.9em;
+}
+
+h2, h4{
+color: #3b61c3;
+}
+
+pre{
+            background: #edf3ff;
+	    margin-top:0.7em;
+	    margin-bottom:0.7em;
+	    padding-top: 1em;
+	    padding-bottom: 1em;
+}
+
+em{
+color: #1a8a4f;
+       font-style:normal;
+       font-weight:bolder;
+}
+
+.footer{
+	margin-top:1em;
+	padding-top:0.5em;
+	border-top: 1px solid #131b6f;
+	font-size:0.85em;
+}
+</style>
 
 </head>
 
-<body>
 
-  <div class="wrapper">
-    <header>
-      <h1 class="title">Mcmg</h1>
-    </header>
-    <div id="container">
-      <p class="tagline">A Markov Chain based music generator for the world of carnatic music.</p>
-      <div id="main" role="main">
-        <div class="download-bar">
-        <div class="inner">
-          <a href="https://github.com/spranesh/mcmg/tarball/master" class="download-button tar"><span>Download</span></a>
-          <a href="https://github.com/spranesh/mcmg/zipball/master" class="download-button zip"><span>Download</span></a>
-          <a href="https://github.com/spranesh/mcmg" class="code">View Mcmg on GitHub</a>
-        </div>
-        <span class="blc"></span><span class="trc"></span>
-        </div>
-        <article class="markdown-body">
-          <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
+<body> 
+<h2> A Markov Chain Based Music Generator</h2>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+<h4>Mohana Ragam</h4>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
+<div class ="author">Pranesh Srinivasan</div>
+<div class = "date">License : Open BSD</div> <br />
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+<div class = "heading">Description</div>
+<p>
+A simple music generator that generates small pieces in carnatic music
+using Markov chains and random walks. Currently, it only generates pieces
+in the mohanam raga, but is written in an easily extendable manner. 
+Any symmetric, linear raga should be easily pluggable given given the
+aarohanam / avarohanam and sample pieces.
 
-<h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
+</p><p>
+I chose the Mohanam Ragam as it is one of the "smaller" (in terms of the
+number of notes) ragams in carnatic music. Further, it is supposed to sound
+good even without gamakams (slides+vibratos). It also has the same notes
+during its ascent and descent, thus making it even easier to deal with.
+</p>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+<pre>
+	Ascent  : sa ri ga pa dha Sa
+	
+	Descent : Sa dha pa ga ri sa
+</pre>
 
-<h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
+<p>
+This python tool uses some small pieces in the mohanam ragam, to
+<emph>learn</emph> the raga by building a transition graph. It then performs a
+random walk on it, keeping in mind several factors like the size of
+transitions, small patterns and some rhythm to generate the resulting score.
+</p><p>
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+It was written in two days, and obviously does not generate very good music
+:).  Still, I think it has <a href="/~spranesh/projects/mcmg/nice">has</a>
+produced some good pieces.
+</p><p>
 
-<h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
+This idea struck me when I was doing Markov Chains during the "Performance
+Evaluation of Computer Systems" course I took in college.
+</p>
 
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+<div class="heading">Examples</div>
+<p>
+During half a day of playing around with this program, it generated some
+pieces I liked. You can find them <a href="nice/">here</a>. In particular I
+like <a href="nice/out7.wav">out7.wav</a>, <a href="nice/out8.wav">out8.wav</a> 
+and <a href="nice/out2.wav">out2.wav</a>.
 
-<h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
+</p><p>
+The input is in (nearly) standard Carnatic notation, thereby allowing easier
+import of music in the future. You can find the pieces it currently uses as
+reference <a href="https://github.com/spranesh/mcmg/tree/master/pieces">here</a>.
+</p>
 
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
-        </article>
-      </div>
-    </div>
-    <footer>
-      <div class="owner">
-      <p><a href="https://github.com/spranesh" class="avatar"><img src="https://avatars3.githubusercontent.com/u/13737?s=60" width="48" height="48"/></a> <a href="https://github.com/spranesh">spranesh</a> maintains <a href="https://github.com/spranesh/mcmg">Mcmg</a></p>
+<div class = "heading">The Small Stuff</div>
+<p>
+<tt>mcmg</tt>, is written in python, and uses the <a href="http://home.arcor.de/mdoege/pysynth/">
+pysynth</a> library to generate the audio file.
+</p><p>
+
+The "music theory" that is often an issue with such software has been handled
+in a couple of python files by me. Carnatic music structure and notation, allow
+for very easy manipulation. It is only in the final step that the music is
+converted into western notation for pysynth to handle.
+</p><p>
+
+pysynth can output the resultant wav file modelling 
+</p>
+<ul>
+<li> a simple piano </li>
+<li> a piano with some caching (the last note rings on for some time) </li>
+<li> a stringed instrument (it tries to manage some of the other harmonics that crop up) </li>
+</ul>
+<p>
+This program also supports all three kinds.
+</p>
 
 
-      </div>
-      <div class="creds">
-        <small>This page generated using <a href="http://pages.github.com/">GitHub Pages</a><br/>theme by <a href="https://twitter.com/jonrohan/">Jon Rohan</a></small>
-      </div>
-    </footer>
-  </div>
-  <div class="current-section">
-    <a href="#top">Scroll to top</a>
-    <a href="https://github.com/spranesh/mcmg/tarball/master" class="tar">tar</a><a href="https://github.com/spranesh/mcmg/zipball/master" class="zip">zip</a><a href="" class="code">source code</a>
-    <p class="name"></p>
-  </div>
+<div class="heading">Download</div>
+<p>You can find the project on github <a href="http://www.github.com/spranesh/mcmg">here</a>. 
+You can clone the project by running:
+<pre>
+  $ git clone https://github.com/spranesh/mcmg.git
+</pre>.
+It requires Python 2.x and the modelling of the cached piano or a stringed
+instrument will require numpy/scipy. 
+</p>
 
-  
-</body>
-</html>
+<div class="heading">Usage</div>
+<p>
+Running the program is simple. Download and extract the tar file above.
+<tt>cd</tt> into the program root, and run
+
+<pre>
+	$ python main.py pieces/*
+</pre>
+
+for its simplest invocation.
+</p><p>
+
+The program takes many command line parameters, that control
+
+<ul>
+<li> the instrument used in the output <tt>(-p)</tt>
+<li> the output wave <tt>(-o)</tt> file and output score <tt>(-s)</tt> file names 
+<li> the speed of the music generated <tt>(-q)</tt> in quarters per minute
+<li> the number of notes (roughly) generated <tt>(-n)</tt>
+<li> the width of its memory during the random walk <tt>(-w)</tt>
+<li> the pitch of the base octave <tt>(-t)</tt>
+</ul>
+
+(See <tt>python main.py --help</tt> for all the command line options.)<br />
+
+</p><p>
+The last parameter, the memory width <tt>(-w)</tt> controls the amount of
+similarity with the original pieces in some sense.
+</p><p>
+
+A more complicated run would be
+<pre>
+	$ python main.py -p s -w 5 -t 2 -n 60 -q 200 -o sample.wav -s sample_notes.txt pieces/*
+</pre>
+
+This would make the program use 
+
+<ul>
+<li> a string (<tt>s</tt> for the <tt>-p</tt> option) instrument in the output
+<li> have a memory width of 5
+<li> use the 2nd octave as the base octave (instead of the default 4)
+<li> generate roughly 60 notes
+<li> with a speed proportional to 200 (equal to 200 quarters per minute)
+<li> set the wave output to sample.wav (for the wave file) 
+<li> set the score output to sample_notes.txt (for the score)
+<li> read music from <tt>pieces/*</tt>
+</ul>
+</p>
+
+
+<div class="footer">Pranesh Srinivasan (Open BSD License)</span></div>
+
+</body></html>
